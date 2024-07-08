@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+
+{% load socialaccount %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block title %}
+    Register
+{% endblock title %}
+
+{% block content %}  
+<div class="text-center">
+    <h1>Register</h1>
+    <form class="btn btn-default" action="/users/register/" method="post">
+        {{ form|crispy }}
+        {% csrf_token %}
+        <br>
+        <button class="btn btn-primary">Register</button> 
+        <br> or </br>
+        <div class=" signin text-center">
+            <a href="https://accounts.google.com/o/oauth2/v2/auth/oauthchooseaccount?client_id=451480260970-8hp4hl1flb71tfgvqolr5n31m3dd5no4.apps.googleusercontent.com&redirect_uri=http%3A%2F%2F127.0.0.1%3A8000%2Faccounts%2Fgoogle%2Flogin%2Fcallback%2F&scope=profile%20email&response_type=code&state=FZBOsUkVDhG4naVQ&access_type=online&service=lso&o2v=2&ddm=0&flowName=GeneralOAuthFlow" class="text-dark"><img src="{% static "web_light_rd_ctn@4x.png" %}" style="width:14rem; height:auto"></a>
+        </div>
+        <br>
+        <p>If you already have an account, <a href={% url "users:login" %}>login</a> instead.</p>
+    </form>
+</div>
+{% endblock content %}

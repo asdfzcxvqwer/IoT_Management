@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+
+{% load socialaccount %}
+
+{% block title %}
+    Home
+{% endblock title %}
+
+{% block content %}
+    <div class="text-center"> 
+        <h2 class="text-center">Welcome to IoT Management System</h2>
+
+        {% if user.is_authenticated %}
+            <form class="logout" action="{% url "users:logout" %}" method="post">
+                {% csrf_token %}
+                <button class="logout-button" style="">Logout</button>
+            </form> 
+        {% else %}
+            <a href="{% url 'users:login' %}">Login</a> or
+            <a href="https://accounts.google.com/o/oauth2/v2/auth/oauthchooseaccount?client_id=451480260970-8hp4hl1flb71tfgvqolr5n31m3dd5no4.apps.googleusercontent.com&redirect_uri=http%3A%2F%2F127.0.0.1%3A8000%2Faccounts%2Fgoogle%2Flogin%2Fcallback%2F&scope=profile%20email&response_type=code&state=FZBOsUkVDhG4naVQ&access_type=online&service=lso&o2v=2&ddm=0&flowName=GeneralOAuthFlow">Login with Google</a>
+        {% endif %}
+    </div>
+{% endblock content %}

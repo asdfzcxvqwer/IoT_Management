@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+
+{% load static %}
+{% load crispy_forms_tags %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        {% block title %}
+            Django App
+        {% endblock title %}
+    </title>
+
+    <link rel="stylesheet" href="https://bootswatch.com/5/zephyr/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+    <script src="{% static 'js/main.js' %}" defer></script>
+</head>
+<body>
+    <nav>
+        <a href="/">Home</a> |
+        <a href="/about">About</a> |
+        {% if user.is_authenticated %}
+            <a href="{% url "devices:list" %}">Devices</a> |    
+            <form class="logout" action="{% url "users:logout" %}" method="post">
+                {% csrf_token %}
+                <button class="logout-button">Logout</button>
+            </form> 
+        {% else %} 
+            <a href="{% url "users:login" %}">Devices</a> |    
+            <a href="{% url "users:login" %}">Login</a> 
+        {% endif %}
+        {% comment %}<a href="/admin">admin</a>{% endcomment %}
+    </nav>
+    <main>
+        {% block content %}
+
+        {% endblock content %}
+    </main>
+</body>
+</html>

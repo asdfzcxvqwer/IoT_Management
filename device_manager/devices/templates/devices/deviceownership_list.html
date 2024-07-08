@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Devices
+{% endblock title %}
+
+{% block content %}
+    <section>
+        <h1>Your devices</h1>
+        {% for device in object_list %}
+            <article class="post">
+                <img class="banner" src="{{ device.banner.url }}" alt="{{ device.id }}">
+                    <h2>
+                    <a href="{% url 'devices:put_log' serial_number=device.device_id %}">
+                        Serial number: {{ device.device_id}}
+                    </a>
+                </h2>
+                <p>Device name: {{ device.device_name }}</p>
+                <p>Owner: {{ user }}</p>
+            </article>
+        {% endfor %}
+    </section>
+{% endblock content %}
